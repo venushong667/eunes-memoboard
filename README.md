@@ -1,2 +1,2 @@
-# eunes_memoboard
+# memoboard server
 memoboard server in eunes
