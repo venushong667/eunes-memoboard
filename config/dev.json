@@ -1,0 +1,11 @@
+{
+    "name": "memoboard",
+    "env": "dev",
+    "port": 3003,
+    "db": {
+        "host": "localhost",
+        "port": 5432,
+        "user": "postgres",
+        "password": "password"
+    }
+}
