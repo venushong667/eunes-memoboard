@@ -15,14 +15,22 @@ const Memo = sequelize.define('Memo', {
         type: DataTypes.UUID,
         allowNull: false
     },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    position: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     config: {
         type: DataTypes.JSON,
         defaultValue: {}
     }
 }, {
     tableName: 'memo',
-    createdAt: true,
-    updatedAt: true
+    createdAt: false,
+    updatedAt: false
 });
 
 module.exports = { Memo }
