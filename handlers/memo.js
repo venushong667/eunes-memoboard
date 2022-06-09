@@ -40,6 +40,6 @@ module.exports = (app) => {
         const id = req.params.id;
         const del = await Memo.destroy({ where: { id: id } });
 
-        res.send({ "success": del });
+        res.send({ success: del });
     });
 }

@@ -43,4 +43,11 @@ module.exports = (app) => {
 
         res.send(board);
     });
+
+    app.del('/board/:id', async (req, res) => {
+        const id = req.params.id;
+        const del = await Board.destroy({ where: { id: id } });
+
+        res.send({ success: del });
+    });
 }

@@ -31,4 +31,11 @@ module.exports = (app) => {
 
         res.send(project);
     });
+
+    app.del('/project/:id', async (req, res) => {
+        const id = req.params.id;
+        const del = await Project.destroy({ where: { id: id } });
+
+        res.send({ success: del });
+    });
 }
