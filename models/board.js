@@ -15,6 +15,10 @@ const Board = sequelize.define('Board', {
         type: DataTypes.UUID,
         allowNull: false
     },
+    position: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
     config: {
         type: DataTypes.JSON,
         defaultValue: {}

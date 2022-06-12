@@ -16,10 +16,7 @@ module.exports = (app) => {
             if (!project) {
                 res.status(404).send("Project not found.")
             }
-
-            const name = req.body.name;
-            const config = req.body.config;
-
+            
             const board = new Board({ ...req.body });
             await board.save();
 
