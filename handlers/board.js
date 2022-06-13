@@ -3,9 +3,14 @@ var { Project } = require('../models/project');
 
 module.exports = (app) => {
     app.get('/boards', async (req, res) => {
-        const board = await Board.findAll();
+        const projectId = req.query.projectId;
+        if (projectId) {
+            var boards = await Board.findAll({ where: { projectId: projectId } });
+        } else {
+            var boards = await Board.findAll();
+        }
 
-        res.send(board);
+        res.send(boards);
     });
 
     app.post('/board', async (req, res) => {
@@ -41,7 +46,7 @@ module.exports = (app) => {
         res.send(board);
     });
 
-    app.del('/board/:id', async (req, res) => {
+    app.delete('/board/:id', async (req, res) => {
         const id = req.params.id;
         const del = await Board.destroy({ where: { id: id } });
 

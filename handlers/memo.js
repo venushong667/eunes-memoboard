@@ -36,7 +36,7 @@ module.exports = (app) => {
         res.send(memo);
     });
 
-    app.del('/memo/:id', async (req, res) => {
+    app.delete('/memo/:id', async (req, res) => {
         const id = req.params.id;
         const del = await Memo.destroy({ where: { id: id } });
 
