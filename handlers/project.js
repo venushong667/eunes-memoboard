@@ -1,4 +1,6 @@
-var { Project } = require('../models/project'); 
+var { Memo } = require('../models/memo');
+var { Board } = require('../models/board');
+var { Project } = require('../models/project');
 
 module.exports = (app) => {
     app.get('/projects', async (req, res) => {
@@ -33,9 +35,15 @@ module.exports = (app) => {
     });
 
     app.delete('/project/:id', async (req, res) => {
-        const id = req.params.id;
-        const del = await Project.destroy({ where: { id: id } });
-
-        res.send({ success: del });
+        try {
+            const id = req.params.id;
+            await Project.destroy({ where: { id: id } });
+            await Board.destroy({ where: { projectId: id } });
+            await Memo.destroy({ where: { projectId: id } });
+               
+            res.send();
+        } catch (e) {
+            res.status(500).send(e);
+        }
     });
 }

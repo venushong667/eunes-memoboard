@@ -15,6 +15,10 @@ const Memo = sequelize.define('Memo', {
         type: DataTypes.UUID,
         allowNull: false
     },
+    projectId: {
+        type: DataTypes.UUID,
+        allowNull: false
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false
