@@ -1,5 +1,6 @@
 var { Memo } = require('../models/memo');
 var { Board } = require('../models/board');
+var { amqpClient } = require('../services/amqp');
 
 module.exports = (app) => {
     app.get('/memos', async (req, res) => {
@@ -18,6 +19,7 @@ module.exports = (app) => {
         const memo = new Memo({ ...req.body });
         await memo.save();
 
+        amqpClient.publish(memo, "create");
         res.send(memo);
     });
 
@@ -26,6 +28,7 @@ module.exports = (app) => {
         const memo = await Memo.findByPk(id);
         memo.update({ ...req.body });
 
+        amqpClient.publish(memo, "update");
         res.send(memo);
     });
 
@@ -40,6 +43,7 @@ module.exports = (app) => {
         const id = req.params.id;
         const del = await Memo.destroy({ where: { id: id } });
 
+        amqpClient.publish({ id: id }, "delete");
         res.send({ success: del });
     });
 }

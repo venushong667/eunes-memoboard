@@ -3,6 +3,8 @@ var createError = require('http-errors');
 var path = require('path');
 const { logger } = require('./services/logging');
 
+var { amqpClient } = require('./services/amqp');
+
 const fs = require('fs');
 const db = require('./services/db');
 const port = 3003;
@@ -38,6 +40,7 @@ const startServer = () => {
 
     // setErrorHandler(app)
     db.init();
+    amqpClient.init();
 
     var files = fs.readdirSync('./handlers/');
     for (let file of files) {

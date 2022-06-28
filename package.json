@@ -6,10 +6,12 @@
     "start": "nodemon main.js"
   },
   "dependencies": {
+    "amqplib": "^0.10.0",
     "convict": "^6.2.1",
     "debug": "~2.6.9",
     "express": "^4.16.4",
     "http-errors": "^1.6.3",
+    "lodash": "^4.17.21",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0",
     "winston": "^3.6.0"

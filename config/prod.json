@@ -7,5 +7,12 @@
         "port": 5432,
         "user": "postgres",
         "password": "password"
+    },
+    "amqp": {
+        "host": "rabbit",
+        "port": 5672,
+        "user": "rabbit",
+        "password": "password",
+        "vhost": "/"
     }
 }

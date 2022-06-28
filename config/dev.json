@@ -3,9 +3,16 @@
     "env": "dev",
     "port": 3003,
     "db": {
-        "host": "db",
+        "host": "localhost",
         "port": 5432,
         "user": "postgres",
         "password": "password"
+    },
+    "amqp": {
+        "host": "localhost",
+        "port": 5672,
+        "user": "rabbit",
+        "password": "password",
+        "vhost": "/"
     }
 }

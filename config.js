@@ -53,6 +53,38 @@ var config = convict({
             env: 'DB_NAME',
             default: 'memoboard'
         }
+    },
+    amqp: {
+        host: {
+            doc: 'AMQP host.',
+            format: String,
+            default: 'rabbit',
+            env: 'AMQP_HOST'
+        },
+        port: {
+            doc: 'AMQP port.',
+            format: Number,
+            default: 5672,
+            env: 'AMQP_PORT'
+        },
+        user: {
+            doc: 'AMQP user.',
+            format: String,
+            default: 'rabbit',
+            env: 'AMQP_USER'
+        },
+        password: {
+            doc: 'AMQP password.',
+            format: String,
+            default: 'password',
+            env: 'AMQP_PASSWORD'
+        },
+        vhost: {
+            doc: 'AMQP vhost.',
+            format: String,
+            default: '/',
+            env: 'AMQP_VHOST'
+        }
     }
 });
 
