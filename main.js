@@ -38,6 +38,11 @@ const startServer = () => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.static(path.join(__dirname, 'public')));
 
+    
+    app.get('/health', function(req, res, next) {
+        res.json({'status': 'UP'});
+    });
+
     // setErrorHandler(app)
     db.init();
     amqpClient.init();

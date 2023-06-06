@@ -1,0 +1,18 @@
+{
+    "service": {
+      "name": "memoboard",
+      "port": 3003,
+      "check": {
+        "http": "http://memoboard:3003/health",
+        "method": "GET",
+        "interval": "10s",
+        "timeout": "30s"
+      },
+      "connect": {
+        "sidecar_service": {}
+      }
+    },
+    "addresses": {
+        "http" : "0.0.0.0"
+    }
+}

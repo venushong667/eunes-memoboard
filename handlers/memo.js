@@ -10,11 +10,11 @@ module.exports = (app) => {
     });
 
     app.post('/memo', async (req, res) => {
-        const boardId = req.body.boardId
-        const board = await Board.findByPk(boardId);
-        if (!board) {
-            res.status(404).send("Board not found.")
-        }
+        console.log(req.body)
+        // const board = await Board.findByPk(boardId);
+        // if (!board) {
+        //     res.status(404).send("Board not found.")
+        // }
 
         const memo = new Memo({ ...req.body });
         await memo.save();

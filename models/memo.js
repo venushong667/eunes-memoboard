@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../services/db');
+const { Board } = require('./board');
 
-const Memo = sequelize.define('Memo', {
+const Memo = sequelize.define('memo', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -9,14 +10,6 @@ const Memo = sequelize.define('Memo', {
     },
     name: {
         type: DataTypes.TEXT,
-        allowNull: false
-    },
-    boardId: {
-        type: DataTypes.UUID,
-        allowNull: false
-    },
-    projectId: {
-        type: DataTypes.UUID,
         allowNull: false
     },
     description: {

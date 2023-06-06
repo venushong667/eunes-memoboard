@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../services/db');
 
-const Board = sequelize.define('Board', {
+const Board = sequelize.define('board', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

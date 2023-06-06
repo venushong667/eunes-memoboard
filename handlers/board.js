@@ -1,6 +1,4 @@
-var { Memo } = require('../models/memo');
-var { Board } = require('../models/board');
-var { Project } = require('../models/project');
+var { Memo, Board, Project } = require('../models')
 
 module.exports = (app) => {
     app.get('/boards', async (req, res) => {
@@ -42,7 +40,12 @@ module.exports = (app) => {
 
     app.get('/board/:id', async (req, res) => {
         const id = req.params.id;
-        const board = await Board.findOne({ where: { id: id } });
+        const board = await Board.findOne({ where: { id: id },
+            include: [{
+                model: Memo,
+                required: false
+            }]
+        });
 
         res.send(board);
     });
