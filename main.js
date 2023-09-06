@@ -1,13 +1,15 @@
 var express = require('express');
 var createError = require('http-errors');
 var path = require('path');
+const config = require('./config');
 const { logger } = require('./services/logging');
 
 var { amqpClient } = require('./services/amqp');
 
 const fs = require('fs');
 const db = require('./services/db');
-const port = 3003;
+
+const port = config.get('port');
 
 exports.run = () => {
     startServer();

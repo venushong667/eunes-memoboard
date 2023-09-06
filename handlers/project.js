@@ -1,6 +1,4 @@
-var { Memo } = require('../models/memo');
-var { Board } = require('../models/board');
-var { Project } = require('../models/project');
+var { Memo, Board, Project } = require('../models');
 
 module.exports = (app) => {
     app.get('/projects', async (req, res) => {
@@ -10,13 +8,18 @@ module.exports = (app) => {
     });
 
     app.post('/project', async (req, res) => {
-        // const name = req.body.name;
-        // const config = req.body.config;
-
-        const project = new Project({ ...req.body });
-        await project.save();
-
-        res.send(project);
+        try {
+            // const name = req.body.name;
+            // const config = req.body.config;
+    
+            const project = new Project({ ...req.body });
+            await project.save();
+    
+            res.send(project);
+        } catch(err) {
+            console.error(err.stack);
+            res.status(500).send(err);
+        }
     });
 
     app.put('/project/:id', async (req, res) => {
@@ -29,7 +32,22 @@ module.exports = (app) => {
 
     app.get('/project/:id', async (req, res) => {
         const id = req.params.id;
-        const project = await Project.findOne({ where: { id: id } });
+        const includeMemo = req.query.memo === 'true' || false;
+        const includeBoard = includeMemo || req.query.board === 'true' || false;
+        
+        const include = []
+        if (includeBoard) {
+            query = { model: Board };
+            if (includeMemo) {
+                query.include = [Memo];
+            }
+            include.push(query);
+        }
+
+        const project = await Project.findOne({
+            where: { id: id },
+            include: include
+        });
 
         res.send(project);
     });

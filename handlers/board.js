@@ -1,10 +1,14 @@
-var { Memo, Board, Project } = require('../models')
+var { Memo, Board, Project } = require('../models');
 
 module.exports = (app) => {
     app.get('/boards', async (req, res) => {
         const projectId = req.query.projectId;
         if (projectId) {
-            var boards = await Board.findAll({ where: { projectId: projectId } });
+            var boards = await Board.findAll({ where: { projectId: projectId },
+                include: [{
+                    model: Memo
+                }]
+            });
         } else {
             var boards = await Board.findAll();
         }
@@ -14,6 +18,9 @@ module.exports = (app) => {
 
     app.post('/board', async (req, res) => {
         try {
+            if (!req.body.name) {
+                res.status(400).send("Name is required.")
+            }
             const projectId = req.body.projectId;
             const project = await Project.findOne({ where: { id: projectId } });
             // Not working yet, it return error
@@ -56,8 +63,9 @@ module.exports = (app) => {
             await Board.destroy({ where: { id: id } });
             await Memo.destroy({ where: { boardId: id }});
             
-            res.send();
+            res.send({success: true});
         } catch (e) {
+
             res.status(500).send(e);
         }
     });

@@ -1,5 +1,4 @@
-var { Memo } = require('../models/memo');
-var { Board } = require('../models/board');
+var { Memo } = require('../models');
 var { amqpClient } = require('../services/amqp');
 
 module.exports = (app) => {
